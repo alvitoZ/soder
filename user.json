@@ -1,0 +1,33 @@
+{
+  "id": 1,
+  "nama": "orangs",
+  "age": 20,
+  "email": "asd@gmail.com",
+  "password": "seele123",
+  "comment": [
+    {
+      "idComment": 1,
+      "comment": "halos"
+    },
+    {
+      "idComment": 2,
+      "comment": "halos2"
+    },
+    {
+      "idComment": 3,
+      "comment": "halos3"
+    }
+  ],
+  "postingan": [
+    {
+      "id": 1,
+      "image": "image/image1.png",
+      "komen": "halos"
+    },
+    {
+      "id": 2,
+      "image": "image/image2.png",
+      "komen": "halos"
+    }
+  ]
+}
