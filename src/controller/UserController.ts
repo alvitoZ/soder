@@ -33,14 +33,20 @@ class UserController implements IController {
   }
   show(req: Request, res: Response): Response {
     let { id } = req.params;
-    let test = data.find((e) => e.id == id);
-    return res.send(test);
+    let orang = data.find((e) => e.id == id);
+    return res.send(orang);
   }
   update(req: Request, res: Response): Response {
-    throw new Error("Method not implemented.");
+    let { id } = req.params;
+    let { nama } = req.body;
+    let orang = data.find((e) => e.id == id);
+    orang.nama = nama;
+    return res.send("diupdate");
   }
   delete(req: Request, res: Response): Response {
-    throw new Error("Method not implemented.");
+    let { id } = req.params;
+    let orang = data.filter((e) => e.id != id);
+    return res.send(orang);
   }
 }
 
