@@ -1,6 +1,7 @@
 import { Router, Response, Request } from "express";
 import IRouter from "./RouterInterface";
 import UserController from "../controller/UserController";
+import { auth } from "../middleware/AuthMiddleware";
 
 class UserRoutes implements IRouter {
   public router: Router;
@@ -16,7 +17,7 @@ class UserRoutes implements IRouter {
   }
 
   public routes(): void {
-    this.router.get("/s", UserController.index);
+    this.router.get("/s", auth, UserController.index);
     this.router.post("/s/:id", UserController.create);
     this.router.get("/s/:id", UserController.show);
     this.router.put("/s/:id", UserController.update);
