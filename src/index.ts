@@ -1,11 +1,15 @@
 // console.log("sassadddasa2");
 import express, { Application, Request, Response } from "express";
-import UserRoutes from "./routers/UserRoutes";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import compression from "compression";
 import helmet from "helmet";
 import cors from "cors";
+// import { config as dotenv } from "dotenv";
+import dotenv from "dotenv";
+
+import UserRoutes from "./routers/UserRoutes";
+import AuthRoutes from "./routers/AuthRoutes";
 
 class App {
   public app: Application;
@@ -14,6 +18,7 @@ class App {
     this.app = express();
     this.plugin();
     this.routes();
+    dotenv.config();
   }
 
   protected plugin(): void {
@@ -30,18 +35,19 @@ class App {
       res.send("dari ts");
     });
 
-    this.app.use("/user", UserRoutes);
+    this.app.use("/api/v1/users", UserRoutes);
+    this.app.use("/api/v1/auth", AuthRoutes);
   }
 }
 
-const port: number = 5000;
+// const port: string | undefined = process.env.DB_PORT;
 const konek = new App().app;
 // const konek2 = new App();
 
 // konek.routes;
 
-konek.listen(port, () => {
-  console.log(`http:localhost:${port}`);
+konek.listen(process.env.DB_PORT, () => {
+  console.log(`http:localhost:${process.env.DB_PORT}`);
 });
 
 // const app = express();

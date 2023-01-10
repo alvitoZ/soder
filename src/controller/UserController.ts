@@ -3,7 +3,12 @@ import { Request, Response, NextFunction } from "express";
 // import { ParsedQs } from "qs";
 import IController from "./ControllerInterface";
 
-let data: any[] = [
+type data2 = {
+  id: number;
+  nama: string;
+};
+
+let data: data2[] = [
   {
     id: 1,
     nama: "seele",
@@ -21,6 +26,7 @@ let data: any[] = [
 class UserController implements IController {
   index(req: Request, res: Response): Response {
     console.log("dari user controller index");
+
     return res.send(data);
   }
   create(req: Request, res: Response): Response {
@@ -36,20 +42,23 @@ class UserController implements IController {
   }
   show(req: Request, res: Response): Response {
     let { id } = req.params;
-    let orang = data.find((e) => e.id == id);
+
+    let orang = data.find((e: any): boolean => e.id == id);
     return res.send(orang);
   }
   update(req: Request, res: Response): Response {
     let { id } = req.params;
     let { nama } = req.body;
-    let orang = data.find((e) => e.id == id);
-    orang.nama = nama;
+    let orang = data.find((e: any) => e.id == id);
+    // orang.nama = nama;
+    orang!.nama = nama || undefined;
     return res.send("data diupdate");
   }
   delete(req: Request, res: Response): Response {
     let { id } = req.params;
-    let orang = data.filter((e) => e.id != id);
+    let orang = data.filter((e: any) => e.id != id);
     return res.send(orang);
+    // return res.send("delete");
   }
 }
 

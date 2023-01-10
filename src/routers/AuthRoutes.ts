@@ -13,8 +13,8 @@ class AuthRoutes implements IRouter {
   }
 
   public routes(): void {
-    this.router.get("/register", AuthController.index);
-    this.router.post("/login", AuthController.create);
+    this.router.post("/register", AuthController.register);
+    this.router.post("/login", AuthController.login);
   }
 }
 
