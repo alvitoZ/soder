@@ -6,10 +6,36 @@ import compression from "compression";
 import helmet from "helmet";
 import cors from "cors";
 // import { config as dotenv } from "dotenv";
-import dotenv from "dotenv";
+import dotenv, { config } from "dotenv";
+import mongoose from "mongoose";
 
 import UserRoutes from "./routers/UserRoutes";
 import AuthRoutes from "./routers/AuthRoutes";
+import { Config } from "./config/Config";
+
+// mongoose
+//   .connect(String("mongodb://127.0.0.1:27017/test"))
+//   .then(() => {
+//     console.info("Mongo connected successfully.");
+//     startServer();
+//   })
+//   .catch((e) => {
+//     console.error(e);
+//   });
+
+mongoose.set("strictQuery", false);
+
+mongoose
+  .connect(Config.mongourl, {
+    retryWrites: true,
+  })
+  .then(() => {
+    console.log("Mongo connected successfully.");
+    startServer();
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 class App {
   public app: Application;
@@ -26,11 +52,14 @@ class App {
     this.app.use(morgan("dev"));
     this.app.use(compression());
     this.app.use(helmet());
-    this.app.use(cors());
+    this.app.use(
+      cors({ credentials: true, origin: String(process.env.ORIGIN) })
+    );
+    this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(express.json());
   }
 
   protected routes(): void {
-    // this.app.route("/").get((req: Request, res: Response) => {
     this.app.get("/", (req: Request, res: Response) => {
       res.send("dari ts");
     });
@@ -40,22 +69,11 @@ class App {
   }
 }
 
-// const port: string | undefined = process.env.DB_PORT;
-const konek = new App().app;
-// const konek2 = new App();
+const startServer = () => {
+  const konek = new App().app;
+  konek.listen(process.env.DB_PORT, () => {
+    console.log(`http:localhost:${process.env.DB_PORT}`);
+  });
+};
 
-// konek.routes;
-
-konek.listen(process.env.DB_PORT, () => {
-  console.log(`http:localhost:${process.env.DB_PORT}`);
-});
-
-// const app = express();
-
-// app.get("/", (req, res) => {
-//   res.send("hawo");
-// });
-
-// app.listen(5000, () => {
-//   console.log("http://localhost:5000");
-// });
+// startServer();

@@ -1,50 +1,28 @@
 import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
 
 export const auth = (req: Request, res: Response, next: NextFunction): any => {
-  let cobaAuth: boolean = true;
-  if (cobaAuth) {
-    console.log("dari middleware");
+  let secretKey: string;
+  let token: string;
 
-    next();
+  if (!req.headers.authorization) {
+    res.status(401);
+    return res.send("gada token authorization");
   } else {
-    res.send(false);
+    secretKey = process.env.JWT_SECRET_KEY || "amia";
+    token = req.headers.authorization.split(" ")[1];
+
+    try {
+      const credential: string | object = jwt.verify(token, secretKey);
+      const coba: string = "amiagw";
+      if (credential) {
+        req.app.locals.credential = credential;
+        // res.send(credential);
+
+        next();
+      }
+    } catch (error) {
+      return res.send(error);
+    }
   }
 };
-
-// const registerUser = async (req: Request, res: Response) => {
-//   const { username, password, email } = req.body;
-
-//   bcrypt.hash(password, 10, (hashError, hash) => {
-//     if (hashError) {
-//       return res.status(401).json({
-//         message: hashError.message,
-//         error: hashError,
-//       });
-//     }
-//     res.json({
-//       hash,
-//     });
-
-//     const _user = new UserModel({
-//       _id: mongoose.Types.ObjectId,
-//       email,
-//       username,
-//       password: hash,
-//     });
-
-//     console.log(_user);
-//     return _user
-//       .save()
-//       .then((user) => {
-//         return res.status(201).json({
-//           user,
-//         });
-//       })
-//       .catch((error) => {
-//         return res.status(500).json({
-//           message: error.message,
-//           error,
-//         });
-//       });
-//   });
-// };
