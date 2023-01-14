@@ -19,7 +19,7 @@ export const auth = (req: Request, res: Response, next: NextFunction): any => {
         req.app.locals.credential = credential;
         // res.send(credential);
 
-        next();
+        return next();
       }
     } catch (error) {
       return res.send(error);

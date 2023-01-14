@@ -12,7 +12,7 @@ const validate = [
         errors: errors.array(),
       });
     } else {
-      next();
+      return next();
     }
   },
 ];

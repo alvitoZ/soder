@@ -11,6 +11,8 @@ import mongoose from "mongoose";
 
 import UserRoutes from "./routers/UserRoutes";
 import AuthRoutes from "./routers/AuthRoutes";
+import AdminRoutes from "./routers/AdminRoutes";
+import BlogRoutes from "./routers/BlogRoutes";
 import { Config } from "./config/Config";
 
 // mongoose
@@ -64,8 +66,10 @@ class App {
       res.send("dari ts");
     });
 
-    this.app.use("/api/v1/users", UserRoutes);
-    this.app.use("/api/v1/auth", AuthRoutes);
+    this.app.use("/api/v1/users", UserRoutes); //crud
+    this.app.use("/api/v1/auth", AuthRoutes); //login resgister
+    this.app.use("/api/v1/blog", BlogRoutes); //user bikin postingan
+    this.app.use("/user/role", AdminRoutes); //admin / member / guest
   }
 }
 

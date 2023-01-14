@@ -30,10 +30,11 @@ class PasswordHash {
   public static generate = (
     id: number,
     username: string,
-    password: string
+    password: string,
+    role: string
   ): string => {
     const secretKey: string = process.env.JWT_SECRET_KEY || "amia";
-    const token: string = jwt.sign({ id, username, password }, secretKey);
+    const token: string = jwt.sign({ id, username, password, role }, secretKey);
     return token;
   };
 }
