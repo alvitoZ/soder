@@ -1,5 +1,5 @@
 // console.log("sassadddasa2");
-import express, { Application, Request, Response } from "express";
+import express, { Application, NextFunction, Request, Response } from "express";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import compression from "compression";
@@ -8,6 +8,7 @@ import cors from "cors";
 // import { config as dotenv } from "dotenv";
 import dotenv, { config } from "dotenv";
 import mongoose from "mongoose";
+import path from "path";
 
 import UserRoutes from "./routers/UserRoutes";
 import AuthRoutes from "./routers/AuthRoutes";
@@ -54,11 +55,10 @@ class App {
     this.app.use(morgan("dev"));
     this.app.use(compression());
     this.app.use(helmet());
-    this.app.use(
-      cors({ credentials: true, origin: String(process.env.ORIGIN) })
-    );
+    this.app.use(cors());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
+    this.app.use("/image", express.static(path.join("public"))); //gambar
   }
 
   protected routes(): void {
@@ -66,7 +66,7 @@ class App {
       res.send("dari ts");
     });
 
-    this.app.use("/api/v1/users", UserRoutes); //crud
+    this.app.use("/api/v1/users", UserRoutes); //crudx
     this.app.use("/api/v1/auth", AuthRoutes); //login resgister
     this.app.use("/api/v1/blog", BlogRoutes); //user bikin postingan
     this.app.use("/user/role", AdminRoutes); //admin / member / guest

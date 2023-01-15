@@ -9,9 +9,9 @@ class AdminRoutes {
     this.routes();
   }
   public routes() {
-    this.router.get("/admin", auth, AdminController.admin);
-    this.router.get("/member", auth, AdminController.member);
-    this.router.get("/guest", AdminController.guest);
+    this.router.post("/admin", auth, AdminController.admin);
+    this.router.post("/member", auth, AdminController.member);
+    this.router.post("/guest", AdminController.guest);
   }
 }
 

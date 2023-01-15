@@ -3,11 +3,21 @@ import { BlogModel } from "../models/BlogModel";
 import IController from "./ControllerInterface";
 import multer from "multer";
 import upload from "../middleware/Upload";
-import path from "path";
 
 class BlogController implements IController {
-  index(req: Request, res: Response): Response {
-    return res.send("index");
+  async index(req: Request, res: Response): Promise<Response> {
+    // const { username } = req.app.locals.credentials;
+
+    // const data = await BlogModel.findOne({
+    //   username: req.params.nama,
+    // });
+
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.setHeader("Access-Control-Allow-Credentials", "true");
+    // res.setHeader("Access-Control-Allow-Headers", "content-type");
+
+    const data = await BlogModel.find();
+    return res.send("index" + data);
   }
 
   async create(req: Request, res: Response): Promise<any> {
