@@ -3,4 +3,5 @@ build
 user.json
 .env
 .sequelizerc
+public
 

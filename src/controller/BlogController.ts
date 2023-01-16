@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { BlogModel } from "../models/BlogModel";
+import { UserModel } from "../models/UserModel";
 import IController from "./ControllerInterface";
 import multer from "multer";
 import upload from "../middleware/Upload";
@@ -17,7 +18,11 @@ class BlogController implements IController {
     // res.setHeader("Access-Control-Allow-Headers", "content-type");
 
     const data = await BlogModel.find();
-    return res.send("index" + data);
+    // return res.send("index" + data);
+    return res.json({
+      msg: "index",
+      data: data,
+    });
   }
 
   async create(req: Request, res: Response): Promise<any> {
@@ -37,19 +42,23 @@ class BlogController implements IController {
         // Everything went fine.
 
         const { username, id } = req.app.locals.credential;
-        const { caption, image } = req.body;
+        const { caption } = req.body;
         // const { path } = req.file;
 
-        const postingan = new BlogModel({
+        const postingan = await BlogModel.insertMany({
           username: username,
           caption: caption,
-          image: req.file?.path,
+          image: req.file?.filename,
         });
 
-        await postingan.save();
+        // await postingan.save();
         res.status(200);
 
-        return res.send("create" + postingan);
+        // return res.send("create" + postingan);
+        return res.json({
+          msg: "create berhasil",
+          data: postingan,
+        });
       }
     );
   }

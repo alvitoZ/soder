@@ -14,7 +14,6 @@ class AdminController {
       res.status(401);
       return res.send({
         msg: "role bukan admin/gagal login sebagai admin",
-        token: req.app.locals.credential,
       });
     }
   }

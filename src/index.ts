@@ -54,11 +54,12 @@ class App {
     this.app.use(bodyParser.json());
     this.app.use(morgan("dev"));
     this.app.use(compression());
-    this.app.use(helmet());
     this.app.use(cors());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
     this.app.use("/image", express.static(path.join("public"))); //gambar
+    // this.app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+    this.app.use(helmet({ contentSecurityPolicy: false }));
   }
 
   protected routes(): void {

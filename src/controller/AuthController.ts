@@ -10,13 +10,13 @@ class AuthController {
 
     const hashed: string = await PasswordHash.hash(password);
 
-    const user = new UserModel({
+    const user = await UserModel.insertMany({
       username: username,
       password: hashed,
       password2: password,
       role: Role.Member,
     });
-    await user.save();
+    // await user.save();
 
     // const createdUsers = await UserModel.insertMany({
     //   username: username,
@@ -26,12 +26,17 @@ class AuthController {
 
     // return res.send("register berhasil");
     res.status(200);
-    return res.send("register berhasil" + user);
+    // return res.send("register berhasil" + user);
+    return res.json({
+      msg: "register berhasil",
+      data: user,
+    });
   };
   async login(req: Request, res: Response): Promise<any> {
     //cari data user by username
     let { username, password } = req.body;
     const user: any = await UserModel.findOne({ username: username });
+
     //  checkUser
     if (!user) {
       res.status(400);
