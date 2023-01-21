@@ -5,10 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "rm -rf build/ && tsc",
-    "ts": "rm -rf build/ && tsc -w",
-    "dev": "rm -rf build/ && tsc -w",
-    "dev2": "rm -rf ./build & tsc & nodemon ./build/index.js"
+    "dev2": "rm -rf ./build & tsc & nodemon ./build/index.js",
+    "dev": "tsc -w"
   },
   "keywords": [],
   "author": "",

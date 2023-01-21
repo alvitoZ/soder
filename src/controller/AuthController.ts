@@ -7,6 +7,15 @@ import { UserModel } from "../models/UserModel";
 class AuthController {
   register = async (req: Request, res: Response): Promise<Response> => {
     let { username, password } = req.body;
+    const userName: any = await UserModel.findOne({ username: username });
+
+    //  checkUser
+    if (userName) {
+      res.status(400);
+      return res.json({
+        msg: "user failed/nama udah ada yg make",
+      });
+    }
 
     const hashed: string = await PasswordHash.hash(password);
 
@@ -16,17 +25,8 @@ class AuthController {
       password2: password,
       role: Role.Member,
     });
-    // await user.save();
 
-    // const createdUsers = await UserModel.insertMany({
-    //   username: username,
-    //   password: hashed,
-    //   password2: password,
-    // });
-
-    // return res.send("register berhasil");
     res.status(200);
-    // return res.send("register berhasil" + user);
     return res.json({
       msg: "register berhasil",
       data: user,
@@ -58,7 +58,7 @@ class AuthController {
         user.role
       );
       res.status(200);
-      return res.send({
+      return res.json({
         msg: "login berhasil",
         token: token,
       });

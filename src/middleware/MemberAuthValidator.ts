@@ -1,10 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
 
 export const auth = (req: Request, res: Response, next: NextFunction): any => {
-  const { Role } = req.app.locals.credential;
+  const { Role, username } = req.app.locals.credential;
+  // if(username == ){
+
+  // }
+  // if (Role == "member" && username == ) {
   if (Role == "member") {
-    return res.send("login sbg member");
+    return next();
   } else {
     return res.send("error");
   }

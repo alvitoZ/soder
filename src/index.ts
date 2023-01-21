@@ -10,9 +10,7 @@ import dotenv, { config } from "dotenv";
 import mongoose from "mongoose";
 import path from "path";
 
-import UserRoutes from "./routers/UserRoutes";
 import AuthRoutes from "./routers/AuthRoutes";
-import AdminRoutes from "./routers/AdminRoutes";
 import BlogRoutes from "./routers/BlogRoutes";
 import { Config } from "./config/Config";
 
@@ -67,10 +65,9 @@ class App {
       res.send("dari ts");
     });
 
-    this.app.use("/api/v1/users", UserRoutes); //crudx
     this.app.use("/api/v1/auth", AuthRoutes); //login resgister
     this.app.use("/api/v1/blog", BlogRoutes); //user bikin postingan
-    this.app.use("/user/role", AdminRoutes); //admin / member / guest
+    // this.app.use("/user/role", AdminRoutes); //admin / member / guest
   }
 }
 

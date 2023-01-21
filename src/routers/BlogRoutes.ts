@@ -15,6 +15,7 @@ class BlogRoutes implements IRouter {
   public routes(): void {
     this.router.get("/", BlogController.index); //iwi
     this.router.get("/:id", BlogController.show);
+    this.router.get("/:username", BlogController.user);
     this.router.post("/", auth, BlogController.create);
     this.router.put("/:id", auth, BlogController.update);
     this.router.delete("/:id", auth, BlogController.delete);
