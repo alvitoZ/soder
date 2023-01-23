@@ -17,7 +17,7 @@ const blogSchema: Schema = new Schema(
       type: String,
     },
     image: {
-      data: Buffer,
+      // data: Buffer,
       type: String,
     },
     komen: {

@@ -14,14 +14,14 @@ export const auth = (req: Request, res: Response, next: NextFunction): any => {
 
     try {
       const credential: string | object = jwt.verify(token, secretKey);
-      const coba: string = "amiagw";
+      // const coba: string = "amiagw";
+
       if (credential) {
         req.app.locals.credential = credential;
-        // res.send(credential);
-
         return next();
       }
     } catch (error) {
+      res.status(401);
       return res.send(error);
     }
   }

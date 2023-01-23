@@ -58,13 +58,14 @@ class AuthController {
         user.role
       );
       res.status(200);
+
       return res.json({
         msg: "login berhasil",
         token: token,
       });
     } else {
       res.status(400);
-      return res.send("auth failed");
+      return res.json({ msg: "auth failed" });
     }
   }
 }

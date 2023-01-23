@@ -9,6 +9,6 @@ export const auth = (req: Request, res: Response, next: NextFunction): any => {
   if (Role == "member") {
     return next();
   } else {
-    return res.send("error");
+    return res.send("tidak punya izin akses");
   }
 };

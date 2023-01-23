@@ -3,7 +3,7 @@ import fs from "fs";
 
 const RemoveImage = (file: string) => {
   console.log(file);
-  const filepath: string = path.join(__dirname, "../../", "/public/", file);
+  const filepath: string = path.join(__dirname, "../../", "/images/", file);
   // console.log(__dirname);
   // console.log(filepath);
   file = path.join(__dirname, "../..", file);
