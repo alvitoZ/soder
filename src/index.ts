@@ -61,7 +61,6 @@ class App {
 
     this.app.use("/api/v1/auth", AuthRoutes); //login resgister
     this.app.use("/api/v1/blog", BlogRoutes); //user bikin postingan
-    // this.app.use("/user/role", AdminRoutes); //admin / member / guest
   }
 }
 

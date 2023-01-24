@@ -15,7 +15,7 @@ import jwt from "jsonwebtoken";
 //   }
 // }
 
-class PasswordHash {
+class HashFunction {
   public static hash = (password: string): Promise<string> => {
     return bcrypt.hash(password, 10);
   };
@@ -39,4 +39,4 @@ class PasswordHash {
   };
 }
 
-export default PasswordHash;
+export default HashFunction;

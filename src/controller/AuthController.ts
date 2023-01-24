@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import PasswordHash from "../utils/PasswordHash";
+import HashFunction from "../utils/HashFunction";
 // import UserModel from "../models/UserModel";
 import { Role } from "../roles/roles";
 import { UserModel } from "../models/UserModel";
@@ -17,7 +17,7 @@ class AuthController {
       });
     }
 
-    const hashed: string = await PasswordHash.hash(password);
+    const hashed: string = await HashFunction.hash(password);
 
     const user = await UserModel.insertMany({
       username: username,
@@ -44,14 +44,14 @@ class AuthController {
     }
 
     //check password
-    let compare: boolean = await PasswordHash.passwordComppare(
+    let compare: boolean = await HashFunction.passwordComppare(
       password,
       user.password
     );
 
     // generate token
     if (compare) {
-      let token = PasswordHash.generate(
+      let token = HashFunction.generate(
         user.id,
         user.username,
         user.password,

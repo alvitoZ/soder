@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { check, validationResult } from "express-validator";
-import cekNama from "../utils/Minori";
+import cekNama from "../utils/IncludeSlash";
 
 const validate = [
   check("username")

@@ -129,7 +129,7 @@ class BlogController implements IController {
 
     if (!blog) {
       return res.json({
-        msg: "ga nemu",
+        msg: "tidak ada data",
       });
     } else {
       if (!blog.image) {
@@ -137,8 +137,7 @@ class BlogController implements IController {
           _id: req.params.id,
         });
         return res.json({
-          msg: "nemu nih tpi gada gambarny",
-          data: blog,
+          msg: "data tanpa gambar dihapus",
         });
       } else {
         await BlogModel.findByIdAndRemove({
@@ -146,8 +145,7 @@ class BlogController implements IController {
         });
         RemoveImage(blog.image);
         return res.json({
-          msg: "nemu nih gw hapus aja",
-          data: blog,
+          msg: "data dihapus",
         });
       }
     }
