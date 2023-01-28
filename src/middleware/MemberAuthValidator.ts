@@ -1,14 +1,21 @@
 import { Request, Response, NextFunction } from "express";
 
-export const auth = (req: Request, res: Response, next: NextFunction): any => {
-  const { Role, username } = req.app.locals.credential;
-  // if(username == ){
-
-  // }
-  // if (Role == "member" && username == ) {
-  if (Role == "member") {
+export const memberAuth = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): any => {
+  const { role, username } = req.app.locals.credential;
+  if (role == "admin") {
     return next();
+  }
+
+  if (username != req.body.username) {
+    res.status(400);
+    return res.json({
+      msg: "tidak punya izin",
+    });
   } else {
-    return res.send("tidak punya izin akses");
+    return next();
   }
 };
