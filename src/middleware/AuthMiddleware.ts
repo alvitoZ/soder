@@ -9,12 +9,11 @@ export const auth = (req: Request, res: Response, next: NextFunction): any => {
     res.status(401);
     return res.send("gada token authorization");
   } else {
-    secretKey = process.env.JWT_SECRET_KEY || "amia";
+    secretKey = process.env.JWT_SECRET_KEY || "undefined";
     token = req.headers.authorization.split(" ")[1];
 
     try {
       const credential: string | object = jwt.verify(token, secretKey);
-      // const coba: string = "amiagw";
 
       if (credential) {
         req.app.locals.credential = credential;

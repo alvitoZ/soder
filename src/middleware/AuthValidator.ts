@@ -6,8 +6,8 @@ const validate = [
   check("username")
     .isLength({ min: 4 })
     .custom(async (value) => {
-      const minori: boolean = cekNama(value);
-      if (minori) {
+      const cekSlash: boolean = cekNama(value);
+      if (cekSlash) {
         throw new Error("jgn pke /");
       }
       return true;

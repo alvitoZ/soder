@@ -31,13 +31,6 @@ class BlogController implements IController {
       .catch((err) => {
         res.json({ error: err });
       });
-
-    // const data = await BlogModel.find();
-    // // return res.send("index" + data);
-    // return res.json({
-    //   msg: "index",
-    //   data: data,
-    // });
   }
 
   async create(req: Request, res: Response): Promise<any> {

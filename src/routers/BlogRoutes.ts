@@ -2,7 +2,6 @@ import { Router, Response, Request } from "express";
 import IRouter from "./RouterInterface";
 import BlogController from "../controller/BlogController";
 import { auth } from "../middleware/AuthMiddleware";
-import { adminAuth } from "../middleware/AdminAuthValidator";
 import { memberAuth } from "../middleware/MemberAuthValidator";
 
 class BlogRoutes implements IRouter {

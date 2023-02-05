@@ -5,7 +5,6 @@ import validate from "../middleware/AuthValidator";
 
 class AuthRoutes implements IRouter {
   public router: Router;
-  // public data = {};
 
   constructor() {
     this.router = Router();

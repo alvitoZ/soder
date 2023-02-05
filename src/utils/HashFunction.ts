@@ -1,20 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-// class PasswordHash {
-//   public _hash: any;
-
-//   constructor() {
-//     this.fungsi();
-//   }
-
-//   fungsi() {
-//     this._hash = (password: string): Promise<string> => {
-//       return bcrypt.hash(password, 10);
-//     };
-//   }
-// }
-
 class HashFunction {
   public static hash = (password: string): Promise<string> => {
     return bcrypt.hash(password, 10);

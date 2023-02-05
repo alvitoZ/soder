@@ -1,4 +1,3 @@
-// console.log("sassadddasa2");
 import express, { Application, NextFunction, Request, Response } from "express";
 import bodyParser from "body-parser";
 import morgan from "morgan";
