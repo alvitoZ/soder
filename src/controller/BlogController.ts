@@ -22,7 +22,7 @@ class BlogController implements IController {
         res.status(200);
         res.json({
           msg: "index",
-          data: result,
+          data: result,   
           total_data: totalData,
           per_page: parseInt(perPage),
           current_page: parseInt(currentPage),
